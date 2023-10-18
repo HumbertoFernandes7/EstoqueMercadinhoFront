@@ -38,3 +38,29 @@ tr:nth-child(even) {
 tr:hover {
   background-color: #ddd;
 }
+
+.modal {
+  background: #e2dddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px #000000;
+  min-width: 550px;
+  position: fixed;
+  left: 50%;
+  padding: 30px;
+  top: 40%;
+  transform: translate(-50%, -50%);
+}
+
+.modalButton{
+  background-color: #77a578; /* Cor de fundo verde */
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-top: 20px; /* Espaçamento superior para o botão */
+  cursor: pointer;
+  border-radius: 8px;
+}

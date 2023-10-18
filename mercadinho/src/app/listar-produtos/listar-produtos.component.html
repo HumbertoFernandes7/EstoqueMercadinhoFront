@@ -1,19 +1,30 @@
-<h1>Lista de Produtos</h1>
-<div class="container">
-  <table>
-    <thead>
-      <tr>
-        <th>Nome do Produto</th>
-        <th>Preço</th>
-        <th>Estoque</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let produto of produtos">
-        <td> {{produto.nome}} </td>
-        <td> {{produto.preco}} </td>
-        <td> {{produto.quantidade}} </td>
-      </tr>
-    </tbody>
-  </table>
+<div *ngIf="!modalVisivel">
+  <h1>Lista de Produtos</h1>
+  <div class="container">
+    <table>
+      <thead>
+        <tr>
+          <th>Nome do Produto</th>
+          <th>Preço</th>
+          <th>Estoque</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let produto of produtos">
+          <td> {{produto.nome}} </td>
+          <td> {{produto.preco}} </td>
+          <td> {{produto.quantidade}} </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Modal de Erro -->
+<div *ngIf="modalVisivel" class="modal" id="errorModal">
+  <div class="modal-content">
+    <h2>Opa!</h2>
+    <p> {{erroMessage}} </p>
+    <button class="modalButton" (click)="fecharModal()">Ok</button>
+  </div>
 </div>

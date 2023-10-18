@@ -1,6 +1,7 @@
 import { produto } from './../modulos/produto';
 import { Component, OnInit } from '@angular/core';
 import { ProdutoService } from '../servicos/produtosService/produto-services.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-listar-produtos',
@@ -10,8 +11,12 @@ import { ProdutoService } from '../servicos/produtosService/produto-services.ser
 export class ListarProdutosComponent implements OnInit {
 
   produtos: produto[] = [];
+  erroMessage: String = ''
+  modalVisivel: boolean = false
 
-  constructor(private produtoService: ProdutoService){
+  constructor(
+    private produtoService: ProdutoService,
+    private router: Router) {
 
   }
 
@@ -26,8 +31,18 @@ export class ListarProdutosComponent implements OnInit {
       this.produtos = retorno as unknown as produto[] ;
       },
       error: (erro) => {
-        alert("FUDEU")
+        this.erroMessage = 'Aconteceu um erro inesperado, tente novamente mais tarde'
+        this.abrirModal();
       }
     })
+  }
+
+  abrirModal(){
+    this.modalVisivel = true;
+  }
+
+  fecharModal() {
+    this.modalVisivel = false;
+    this.router.navigate(['home'])
   }
 }
