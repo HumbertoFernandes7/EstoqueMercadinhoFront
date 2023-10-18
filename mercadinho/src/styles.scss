@@ -1,1 +1,9 @@
-/* You can add global styles to this file, and also import other style files */
+$body-font: Arial, sans-serif;
+$primary-bg-color: #faf8f8;
+
+.corpo {
+  font-family: $body-font;
+  background-color: $primary-bg-color;
+  margin: 0;
+  padding: 0;
+}
