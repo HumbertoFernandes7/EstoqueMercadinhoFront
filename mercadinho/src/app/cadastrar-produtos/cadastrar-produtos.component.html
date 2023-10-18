@@ -1,0 +1,24 @@
+<div *ngIf="!modalVisivel">
+  <h1>Cadastrar Produto</h1>
+    <form [formGroup]="cadastroProdutoForm">
+      <label for="nome">Nome do Produto:</label>
+      <input formControlName="nome" type="text" id="nome" name="nome" required><br><br>
+
+      <label for="quantidade">Quantidade:</label>
+      <input formControlName="quantidade" type="number" id="quantidade" name="quantidade" required><br><br>
+
+      <label for="preco">Preço:</label>
+      <input formControlName="preco" type="number" step="0.01" id="preco" name="preco" required><br><br>
+
+      <button (click)="cadastraProduto()" type="submit">Enviar</button>
+    </form>
+</div>
+
+<!-- Modal de Erro -->
+<div *ngIf="modalVisivel" class="modal" id="errorModal">
+  <div>
+    <h2> {{tituloDoModal}} </h2>
+    <p> {{mensagemDoModal}} </p>
+    <button class="modalButton" (click)="fecharModal()">Ok</button>
+  </div>
+</div>

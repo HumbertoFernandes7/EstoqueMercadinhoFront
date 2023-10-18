@@ -11,8 +11,8 @@ import { Router } from '@angular/router';
 export class ListarProdutosComponent implements OnInit {
 
   produtos: produto[] = [];
-  erroMessage: String = ''
-  modalVisivel: boolean = false
+  mensagemErro: String = '';
+  modalVisivel: boolean = false;
 
   constructor(
     private produtoService: ProdutoService,
@@ -31,7 +31,7 @@ export class ListarProdutosComponent implements OnInit {
       this.produtos = retorno as unknown as produto[] ;
       },
       error: (erro) => {
-        this.erroMessage = 'Aconteceu um erro inesperado, tente novamente mais tarde'
+        this.mensagemErro = 'Aconteceu um erro inesperado, tente novamente mais tarde'
         this.abrirModal();
       }
     })

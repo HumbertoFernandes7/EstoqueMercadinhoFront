@@ -1,9 +1,8 @@
+import { produto } from './../../modulos/produto';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.desenv';
 
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs';
-import { produto } from 'src/app/modulos/produto';
 
 const APIURL = environment;
 
@@ -16,5 +15,9 @@ export class ProdutoService {
 
   listaProdutos() {
     return this.http.get<produto>('http://localhost:8080/produtos/listar')
+  }
+
+  cadastraProduto(produto: produto) {
+    return this.http.post<produto>('http://localhost:8080/produtos/cadastro', produto)
   }
 }
