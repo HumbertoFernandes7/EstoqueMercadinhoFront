@@ -3,6 +3,7 @@ import { ProdutoService } from './../servicos/produtosService/produto-services.s
 import { Component, OnInit } from '@angular/core';
 import { produto } from '../modulos/produto';
 
+
 @Component({
   selector: 'app-cadastrar-produtos',
   templateUrl: './cadastrar-produtos.component.html',
