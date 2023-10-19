@@ -17,7 +17,6 @@ export class ListarProdutosComponent implements OnInit {
   constructor(
     private produtoService: ProdutoService,
     private router: Router) {
-
   }
 
   ngOnInit() {
@@ -27,7 +26,6 @@ export class ListarProdutosComponent implements OnInit {
   listaProdutos() {
     this.produtoService.listaProdutos().subscribe({
       next: (retorno) => {
-        console.log(retorno.id);
       this.produtos = retorno as unknown as produto[] ;
       },
       error: (erro) => {
