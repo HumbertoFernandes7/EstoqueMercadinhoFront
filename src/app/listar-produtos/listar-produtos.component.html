@@ -12,21 +12,45 @@
       </thead>
       <tbody>
         <tr *ngFor="let produto of produtos">
-          <td> {{produto.nome}} </td>
-          <td> R$ {{produto.preco}} </td>
-          <td> {{produto.quantidade}} </td>
-          <td><i class="bi bi-justify"></i></td>
+          <td>{{ produto.nome }}</td>
+          <td>R$ {{ produto.preco }}</td>
+          <td>{{ produto.quantidade }}</td>
+          <td>
+            <div class="icon-container">
+              <i class="bi bi-pencil-square bi-justify"></i>
+              <i
+                class="bi bi-trash-fill bi-justify"
+                (click)="abrirModalExcluir(produto.id)"
+              ></i>
+            </div>
+          </td>
         </tr>
       </tbody>
     </table>
   </div>
 </div>
-
 <!-- Modal de Erro -->
 <div *ngIf="modalVisivel" class="modal" id="errorModal">
   <div>
     <h2>Opa!</h2>
-    <p> {{mensagemErro}} </p>
+    <p>{{ mensagemErro }}</p>
     <button class="modalButton" (click)="fecharModal()">Ok</button>
+  </div>
+</div>
+
+<div *ngIf="modalExcluirVisivel" class="modal" id="errorModal">
+  <div>
+    <h2>Opa!</h2>
+    <p>{{ mensagemErro }}</p>
+    <button id="modalConfirmou" class="modalButton" (click)="excluirProduto()">
+      Sim
+    </button>
+    <button
+      id="modalNaoConfirmou"
+      class="modalButton modalButtonExcluir"
+      (click)="fecharModalExcluir()"
+    >
+      Não
+    </button>
   </div>
 </div>

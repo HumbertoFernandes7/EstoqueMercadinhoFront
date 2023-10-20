@@ -20,4 +20,8 @@ export class ProdutoService {
   cadastraProduto(produto: produto) {
     return this.http.post<produto>(`${APIURL}/cadastro`, produto)
   }
+
+  excluirProduto( id : number) {
+    return this.http.delete(`${APIURL}/${id}`)
+  }
 }
