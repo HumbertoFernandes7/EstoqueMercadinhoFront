@@ -17,7 +17,10 @@
           <td>{{ produto.quantidade }}</td>
           <td>
             <div class="icon-container">
-              <i class="bi bi-pencil-square bi-justify"></i>
+              <i
+                class="bi bi-pencil-square bi-justify"
+                (click)="alterarProduto(produto.id)"
+              ></i>
               <i
                 class="bi bi-trash-fill bi-justify"
                 (click)="abrirModalExcluir(produto.id)"

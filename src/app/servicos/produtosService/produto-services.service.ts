@@ -7,21 +7,28 @@ import { HttpClient } from '@angular/common/http';
 const APIURL = environment.api_url;
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProdutoService {
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   listaProdutos() {
-    return this.http.get<produto>(`${APIURL}/listar`)
+    return this.http.get<produto>(`${APIURL}/listar`);
   }
 
   cadastraProduto(produto: produto) {
-    return this.http.post<produto>(`${APIURL}/cadastro`, produto)
+    return this.http.post<produto>(`${APIURL}/cadastro`, produto);
   }
 
-  excluirProduto( id : number) {
-    return this.http.delete(`${APIURL}/${id}`)
+  excluirProduto(id: number) {
+    return this.http.delete(`${APIURL}/${id}`);
+  }
+
+  alterarProduto(id: number, produtoAtualizado: produto) {
+    return this.http.put(`${APIURL}/${id}/alterar`, produtoAtualizado);
+  }
+
+  buscaProdutoPorId(id: number) {
+    return this.http.get<produto>(`${APIURL}/${id}`);
   }
 }

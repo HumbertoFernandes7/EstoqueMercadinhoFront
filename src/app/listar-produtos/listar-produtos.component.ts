@@ -14,6 +14,7 @@ export class ListarProdutosComponent implements OnInit {
   modalVisivel: boolean = false;
   popUpAberto: boolean = false;
   modalExcluirVisivel: boolean = false;
+  modalEditarVisivel: boolean = false;
   id!: number;
 
   constructor(private produtoService: ProdutoService, private router: Router) {}
@@ -21,6 +22,8 @@ export class ListarProdutosComponent implements OnInit {
   ngOnInit() {
     this.listaProdutos();
   }
+
+  //MÉTODOS
 
   listaProdutos() {
     this.produtoService.listaProdutos().subscribe({
@@ -46,6 +49,12 @@ export class ListarProdutosComponent implements OnInit {
       },
     });
   }
+
+  alterarProduto(id: number) {
+    this.router.navigate([`produtos/${id}/alterar`]);
+  }
+
+  //MODAIS
 
   abrirModalExcluir(id: number) {
     this.modalExcluirVisivel = true;

@@ -4,6 +4,7 @@ import { HomeComponent } from './home/home.component';
 import { AppComponent } from './app.component';
 import { ListarProdutosComponent } from './listar-produtos/listar-produtos.component';
 import { CadastrarProdutosComponent } from './cadastrar-produtos/cadastrar-produtos.component';
+import { AlterarProdutoComponent } from './alterar-produto/alterar-produto.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,10 @@ const routes: Routes = [
   {
     path: "produtos/cadastrar", component: CadastrarProdutosComponent
   },
+  {
+    path: "produtos/:id/alterar", component: AlterarProdutoComponent
+  },
+
 ];
 
 @NgModule({

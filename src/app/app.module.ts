@@ -10,6 +10,10 @@ import { ListarProdutosComponent } from './listar-produtos/listar-produtos.compo
 import { HttpClientModule } from '@angular/common/http';
 import { CadastrarProdutosComponent } from './cadastrar-produtos/cadastrar-produtos.component';
 import { ReactiveFormsModule } from '@angular/forms'
+import { NgxCurrencyDirective } from 'ngx-currency';
+
+import { AlterarProdutoComponent } from './alterar-produto/alterar-produto.component';
+
 
 @NgModule({
   declarations: [
@@ -19,12 +23,17 @@ import { ReactiveFormsModule } from '@angular/forms'
     FooterComponent,
     ListarProdutosComponent,
     CadastrarProdutosComponent,
+    AlterarProdutoComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    NgxCurrencyDirective
+
+
+
 
   ],
   providers: [],
