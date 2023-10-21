@@ -1,4 +1,3 @@
-
 h1 {
   color: rgb(0, 0, 0);
   text-align: center;
@@ -11,12 +10,9 @@ h1 {
 }
 
 table {
-
   width: 100%;
   margin-top: 30px;
-
-  background-color: rgb(255, 255, 255);
-
+  background-color: rgb(238, 232, 232);
 }
 
 th, td {
@@ -30,6 +26,7 @@ th, td {
   justify-content: center; /* Centraliza horizontalmente */
   align-items: center; /* Centraliza verticalmente */
   margin: 0 auto; /* Centraliza horizontalmente na página */
+  cursor: pointer;
 }
 
 th {
@@ -82,8 +79,6 @@ tr:hover {
   font-size: 24px; /* Tamanho do ícone */
   cursor: pointer;
   margin-right: 4px;
-
-  /* Outros estilos personalizados que você desejar */
 }
 
 

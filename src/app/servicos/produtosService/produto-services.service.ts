@@ -1,8 +1,8 @@
 import { produto } from './../../modulos/produto';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.desenv';
-
 import { HttpClient } from '@angular/common/http';
+import { quantidade } from 'src/app/modulos/quantidade';
 
 const APIURL = environment.api_url;
 
@@ -10,6 +10,7 @@ const APIURL = environment.api_url;
   providedIn: 'root',
 })
 export class ProdutoService {
+
   constructor(private http: HttpClient) {}
 
   listaProdutos() {
@@ -30,5 +31,13 @@ export class ProdutoService {
 
   buscaProdutoPorId(id: number) {
     return this.http.get<produto>(`${APIURL}/${id}`);
+  }
+
+  adicionarQuantidadeEstoque(id: number, quantidadeAlterada: quantidade) {
+    return this.http.put(`${APIURL}/${id}/adicionarQuantidade`, quantidadeAlterada);
+  }
+
+  removerQuantidadeEstoque() {
+
   }
 }

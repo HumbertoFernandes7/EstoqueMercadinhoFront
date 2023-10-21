@@ -14,7 +14,11 @@
         <tr *ngFor="let produto of produtos">
           <td>{{ produto.nome }}</td>
           <td>R$ {{ produto.preco }}</td>
-          <td>{{ produto.quantidade }}</td>
+          <div class="icon-container">
+            <i (click)="removerQuantidadeEstoque(produto)" class="bi bi-dash-circle"></i>
+            <td>{{ produto.quantidade }}</td>
+            <i (click)="adicionarQuantidadeEstoque(produto)" class="bi bi-plus-circle"></i>
+          </div>
           <td>
             <div class="icon-container">
               <i
