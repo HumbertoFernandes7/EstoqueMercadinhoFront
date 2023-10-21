@@ -1,8 +1,10 @@
+import { ListarProdutosComponent } from './../listar-produtos/listar-produtos.component';
 import { produto } from './../modulos/produto';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProdutoService } from '../servicos/produtosService/produto-services.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-alterar-produto',
@@ -24,7 +26,9 @@ export class AlterarProdutoComponent implements OnInit {
     private produtoService: ProdutoService,
     private formBuilder: FormBuilder,
     private activeRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private location: Location
+
   ) {}
 
   ngOnInit(){
@@ -74,6 +78,10 @@ export class AlterarProdutoComponent implements OnInit {
           },
         });
     }
+  }
+
+  voltarParaLista() {
+    this.location.back();
   }
 
   //MODAIS

@@ -25,7 +25,12 @@
       required
     />
 
-    <button (click)="alterarProduto()" type="submit">Atualizar</button>
+    <div class="botao-centralizado">
+      <button (click)="alterarProduto()" type="submit" class="botao-alterar">Atualizar</button>
+      <button (click)="voltarParaLista()" class="botao-voltar">Voltar</button>
+    </div>
+
+
   </form>
 </div>
 <!-- Modal de Erro -->

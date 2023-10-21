@@ -54,6 +54,14 @@ export class ListarProdutosComponent implements OnInit {
     this.router.navigate([`produtos/${id}/alterar`]);
   }
 
+  aumentarQuantidadeProduto() {
+
+  }
+
+  diminuirQuantidadeProduto() {
+
+
+  }
   //MODAIS
 
   abrirModalExcluir(id: number) {
