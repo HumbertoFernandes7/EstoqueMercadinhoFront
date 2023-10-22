@@ -17,7 +17,7 @@ export class ListarProdutosComponent implements OnInit {
   modalExcluirVisivel: boolean = false;
   modalEditarVisivel: boolean = false;
   id!: number;
-  quantidadeAlterada!: quantidade
+  quantidadeAlterada!: quantidade;
 
   constructor(private produtoService: ProdutoService, private router: Router) {}
 
@@ -57,29 +57,51 @@ export class ListarProdutosComponent implements OnInit {
   }
 
   adicionarQuantidadeEstoque(produto: produto) {
-    let quantidadeFinal: quantidade
-    quantidadeFinal = { quantidade: 1 }
-    this.produtoService.adicionarQuantidadeEstoque(produto.id, quantidadeFinal).subscribe({
-      next: (retorno) => {
-      this.listaProdutos();
-      },
-      error: (erro) => {
-        this.mensagemErro = 'Aconteceu um erro inesperado, tente novamente mais tarde!'
-        this.abrirModal()
+    let quantidadeFinal: quantidade;
+    quantidadeFinal = { quantidade: 1 };
+    this.produtoService
+      .adicionarQuantidadeEstoque(produto.id, quantidadeFinal)
+      .subscribe({
+        next: (retorno) => {
+          this.listaProdutos();
+        },
+        error: (erro) => {
+          this.mensagemErro =
+            'Aconteceu um erro inesperado, tente novamente mais tarde!';
+          this.abrirModal();
 
-        this.listaProdutos();
-      },
-    });
+          this.listaProdutos();
+        },
+      });
   }
-
-
-
-
 
   removerQuantidadeEstoque(produto: produto) {
+    const quantidadeParaRemover: number = 1;
+    let quantidadeFinal = { quantidade: 1 };
+    if (produto.quantidade - quantidadeParaRemover) {
+      const quantidadeFinal: quantidade = {
+        quantidade: produto.quantidade - quantidadeParaRemover,
+      };
+    } else {
+      this.mensagemErro = 'Não há quantidade suficiente em estoque.';
+      this.abrirModal();
+    }
 
-
+    this.produtoService
+      .removerQuantidadeEstoque(produto.id, quantidadeFinal)
+      .subscribe({
+        next: (retorno) => {
+          this.listaProdutos();
+        },
+        error: (erro) => {
+          this.mensagemErro =
+            'Aconteceu um erro inesperado, tente novamente mais tarde!';
+          this.abrirModal();
+          this.listaProdutos();
+        },
+      });
   }
+
   //MODAIS
 
   abrirModalExcluir(id: number) {

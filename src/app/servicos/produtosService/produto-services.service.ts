@@ -1,8 +1,9 @@
+import { quantidade } from './../../modulos/quantidade';
 import { produto } from './../../modulos/produto';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.desenv';
 import { HttpClient } from '@angular/common/http';
-import { quantidade } from 'src/app/modulos/quantidade';
+
 
 const APIURL = environment.api_url;
 
@@ -37,7 +38,7 @@ export class ProdutoService {
     return this.http.put(`${APIURL}/${id}/adicionarQuantidade`, quantidadeAlterada);
   }
 
-  removerQuantidadeEstoque() {
-
+  removerQuantidadeEstoque(id: number, quantidadeAlterada: quantidade) {
+    return this.http.put(`${APIURL}/${id}/removerQuantidade`, quantidadeAlterada);
   }
 }
