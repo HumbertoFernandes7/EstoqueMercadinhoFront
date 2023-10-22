@@ -76,17 +76,7 @@ export class ListarProdutosComponent implements OnInit {
   }
 
   removerQuantidadeEstoque(produto: produto) {
-    const quantidadeParaRemover: number = 1;
     let quantidadeFinal = { quantidade: 1 };
-    if (produto.quantidade - quantidadeParaRemover) {
-      const quantidadeFinal: quantidade = {
-        quantidade: produto.quantidade - quantidadeParaRemover,
-      };
-    } else {
-      this.mensagemErro = 'Não há quantidade suficiente em estoque.';
-      this.abrirModal();
-    }
-
     this.produtoService
       .removerQuantidadeEstoque(produto.id, quantidadeFinal)
       .subscribe({
@@ -94,10 +84,13 @@ export class ListarProdutosComponent implements OnInit {
           this.listaProdutos();
         },
         error: (erro) => {
-          this.mensagemErro =
-            'Aconteceu um erro inesperado, tente novamente mais tarde!';
+          console.log(erro);
+          this.mensagemErro = erro.error.message;
+
           this.abrirModal();
           this.listaProdutos();
+
+
         },
       });
   }
