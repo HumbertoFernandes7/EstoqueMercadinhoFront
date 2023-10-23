@@ -9,7 +9,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { ListarProdutosComponent } from './listar-produtos/listar-produtos.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CadastrarProdutosComponent } from './cadastrar-produtos/cadastrar-produtos.component';
-import { ReactiveFormsModule } from '@angular/forms'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { NgxCurrencyDirective } from 'ngx-currency';
 
 import { AlterarProdutoComponent } from './alterar-produto/alterar-produto.component';
@@ -30,11 +30,8 @@ import { AlterarProdutoComponent } from './alterar-produto/alterar-produto.compo
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    NgxCurrencyDirective
-
-
-
-
+    NgxCurrencyDirective,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

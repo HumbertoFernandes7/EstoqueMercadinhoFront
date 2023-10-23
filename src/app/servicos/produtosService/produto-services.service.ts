@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.desenv';
 import { HttpClient } from '@angular/common/http';
 
+import { Observable } from 'rxjs';
 
 const APIURL = environment.api_url;
 
@@ -41,4 +42,9 @@ export class ProdutoService {
   removerQuantidadeEstoque(id: number, quantidadeAlterada: quantidade) {
     return this.http.put(`${APIURL}/${id}/removerQuantidade`, quantidadeAlterada);
   }
+
+  carregarListaDeProdutos(): Observable<produto[]> {
+    return this.http.get<produto[]>(`${APIURL}/listar`);
+  }
+
 }
