@@ -42,6 +42,15 @@ tr:hover {
   background-color: #ddd;
 }
 
+.bi-justify{
+  display: flex;
+  justify-content: center; /* Centraliza horizontalmente */
+  align-items: center; /* Centraliza verticalmente */
+  font-size: 24px; /* Tamanho do ícone */
+  cursor: pointer;
+  margin-right: 4px;
+}
+
 .modal {
   background: #e2dddd;
   border-radius: 8px;
@@ -71,17 +80,6 @@ tr:hover {
   background-color: #ee1212; /* Cor de fundo vermelho */
 
 }
-
-.bi-justify{
-  display: flex;
-  justify-content: center; /* Centraliza horizontalmente */
-  align-items: center; /* Centraliza verticalmente */
-  font-size: 24px; /* Tamanho do ícone */
-  cursor: pointer;
-  margin-right: 4px;
-}
-
-
 
 
 

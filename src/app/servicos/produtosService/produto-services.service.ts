@@ -1,10 +1,12 @@
-import { quantidade } from './../../modulos/quantidade';
-import { produto } from './../../modulos/produto';
+
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.desenv';
 import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
+import { Produto } from 'src/app/modulos/Produto';
+import { Quantidade } from 'src/app/modulos/Quantidade';
+
 
 const APIURL = environment.api_url;
 
@@ -16,35 +18,35 @@ export class ProdutoService {
   constructor(private http: HttpClient) {}
 
   listaProdutos() {
-    return this.http.get<produto>(`${APIURL}/listar`);
+    return this.http.get<Produto>(`${APIURL}/listar`);
   }
 
-  cadastraProduto(produto: produto) {
-    return this.http.post<produto>(`${APIURL}/cadastro`, produto);
+  cadastraProduto(produto: Produto) {
+    return this.http.post<Produto>(`${APIURL}/cadastro`, produto);
   }
 
   excluirProduto(id: number) {
     return this.http.delete(`${APIURL}/${id}`);
   }
 
-  alterarProduto(id: number, produtoAtualizado: produto) {
+  alterarProduto(id: number, produtoAtualizado: Produto) {
     return this.http.put(`${APIURL}/${id}/alterar`, produtoAtualizado);
   }
 
   buscaProdutoPorId(id: number) {
-    return this.http.get<produto>(`${APIURL}/${id}`);
+    return this.http.get<Produto>(`${APIURL}/${id}`);
   }
 
-  adicionarQuantidadeEstoque(id: number, quantidadeAlterada: quantidade) {
+  adicionarQuantidadeEstoque(id: number, quantidadeAlterada: Quantidade) {
     return this.http.put(`${APIURL}/${id}/adicionarQuantidade`, quantidadeAlterada);
   }
 
-  removerQuantidadeEstoque(id: number, quantidadeAlterada: quantidade) {
+  removerQuantidadeEstoque(id: number, quantidadeAlterada: Quantidade) {
     return this.http.put(`${APIURL}/${id}/removerQuantidade`, quantidadeAlterada);
   }
 
-  carregarListaDeProdutos(): Observable<produto[]> {
-    return this.http.get<produto[]>(`${APIURL}/listar`);
+  carregarListaDeProdutos(): Observable<Produto[]> {
+    return this.http.get<Produto[]>(`${APIURL}/listar`);
   }
 
 }

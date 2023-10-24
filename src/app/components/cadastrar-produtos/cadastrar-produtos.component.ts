@@ -1,6 +1,6 @@
-import { produto } from './../modulos/produto';
+import { Produto } from '../../modulos/Produto';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ProdutoService } from './../servicos/produtosService/produto-services.service';
+import { ProdutoService } from '../../servicos/produtosService/produto-services.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
@@ -37,9 +37,9 @@ export class CadastrarProdutosComponent implements OnInit {
 
   cadastraProduto() {
     if (this.cadastroProdutoForm.valid) {
-      var produto = this.cadastroProdutoForm.getRawValue() as produto;
+      var produto = this.cadastroProdutoForm.getRawValue() as Produto;
       this.produtoService.cadastraProduto(produto).subscribe({
-        next: (retorno) => {
+        next: () => {
           this.mensagemDoModal = 'Seu produto foi cadastrado com sucesso!';
           this.tituloDoModal = 'Deu certo!';
           this.abrirModal();

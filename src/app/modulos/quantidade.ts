@@ -1,3 +1,3 @@
-export interface quantidade {
+export interface Quantidade {
   quantidade: number
 }

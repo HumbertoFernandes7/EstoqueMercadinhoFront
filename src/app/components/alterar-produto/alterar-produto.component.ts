@@ -1,9 +1,8 @@
-import { ListarProdutosComponent } from './../listar-produtos/listar-produtos.component';
-import { produto } from './../modulos/produto';
+import { Produto } from '../../modulos/Produto';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProdutoService } from '../servicos/produtosService/produto-services.service';
+import { ProdutoService } from '../../servicos/produtosService/produto-services.service';
 import { Location } from '@angular/common';
 
 @Component({
@@ -20,7 +19,7 @@ export class AlterarProdutoComponent implements OnInit {
   quantidade!: '';
   preco!: '';
   produtoId!: number;
-  produtoEncontrado!: produto;
+  produtoEncontrado!: Produto;
 
   constructor(
     private produtoService: ProdutoService,
@@ -48,25 +47,27 @@ export class AlterarProdutoComponent implements OnInit {
   buscaProdutoPorId(id: number) {
     this.produtoService.buscaProdutoPorId(id).subscribe({
       next: (retorno) => {
-        this.produtoEncontrado = retorno as produto;
+        this.produtoEncontrado = retorno as Produto;
         if (!this.produtoEncontrado) return;
         this.alteraProdutoForm.get('nome')?.setValue(retorno.nome);
         this.alteraProdutoForm.get('quantidade')?.setValue(retorno.quantidade);
         this.alteraProdutoForm.get('preco')?.setValue(retorno.preco);
       },
       error: (error) => {
-        console.log('Deu erro!');
+        this.tituloDoModal = 'Opa!'
+        this.mensagemDoModal = error.error.message;
+        this.abrirModal();
       },
     });
   }
 
   alterarProduto() {
     if (this.alteraProdutoForm.valid) {
-      var produtoAlterado = this.alteraProdutoForm.getRawValue() as produto;
+      var produtoAlterado = this.alteraProdutoForm.getRawValue() as Produto;
       this.produtoService
         .alterarProduto(this.produtoId, produtoAlterado)
         .subscribe({
-          next: (retorno) => {
+          next: () => {
             this.mensagemDoModal = 'Seu produto foi atualizado com sucesso!';
             this.tituloDoModal = 'Deu certo!';
             this.abrirModal();
