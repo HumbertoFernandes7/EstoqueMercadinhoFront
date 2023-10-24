@@ -18,22 +18,11 @@ export class ListarProdutosComponent implements OnInit {
   modalEditarVisivel: boolean = false;
   id!: number;
   quantidadeAlterada!: quantidade;
-  termoDePesquisa: string = '';
-  produtosFiltrados: produto[] = [];
 
   constructor(private produtoService: ProdutoService, private router: Router) {}
 
   ngOnInit() {
     this.listaProdutos();
-    this.produtoService.carregarListaDeProdutos().subscribe(
-      (produtos) => {
-        this.produtos = produtos;
-        this.produtosFiltrados = produtos;
-      },
-      (error) => {
-        // Lidar com erros, se necessário
-      }
-    );
   }
 
   //MÉTODOS
@@ -43,33 +32,14 @@ export class ListarProdutosComponent implements OnInit {
       next: (retorno) => {
         this.produtos = retorno as unknown as produto[];
       },
-      error: (erro) => {
+      error: () => {
         this.mensagemErro =
           'Aconteceu um erro inesperado, tente novamente mais tarde';
         this.abrirModal();
       },
     });
   }
-  carregarListaDeProdutos() {
-    this.produtoService
-      .carregarListaDeProdutos()
-      .subscribe((produtos: produto[]) => {
-        this.produtos = produtos;
-        this.produtosFiltrados = produtos;
-      });
-  }
 
-  buscarProdutos() {
-    if (this.termoDePesquisa) {
-      // Filtre os produtos com base no termo de pesquisa
-      this.produtosFiltrados = this.produtos.filter((produto) =>
-        produto.nome.toLowerCase().includes(this.termoDePesquisa.toLowerCase())
-      );
-    } else {
-      // Se o termo de pesquisa estiver vazio, mostre todos os produtos
-      this.produtosFiltrados = this.produtos;
-    }
-  }
 
   excluirProduto() {
     this.produtoService.excluirProduto(this.id).subscribe({
@@ -122,14 +92,6 @@ export class ListarProdutosComponent implements OnInit {
           this.listaProdutos();
         },
       });
-  }
-
-  filtrarProdutos() {
-    this.produtosFiltrados = this.produtos.filter((produto) => {
-      return produto.nome
-        .toLowerCase()
-        .includes(this.termoDePesquisa.toLowerCase());
-    });
   }
 
   //MODAIS

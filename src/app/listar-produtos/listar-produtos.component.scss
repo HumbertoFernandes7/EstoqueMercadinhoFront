@@ -82,25 +82,7 @@ tr:hover {
 }
 
 
-/* Container da barra de pesquisa */
-.search-bar-table-container {
-  display: flex;
-  justify-content: center; /* Centraliza horizontalmente */
-  align-items: center; /* Centraliza verticalmente */
-  flex-direction: column; /* Empilha verticalmente os elementos dentro do container */
-}
 
-/* Entrada da barra de pesquisa */
-.search-bar-table-container input[type="text"] {
-  padding: 7.5px;
-  width: 400px;
-  border: 1px solid #000000;
-  border-radius: 5px;
-  font-size: 16px;
-  margin-bottom: 10px; /* Espaçamento inferior para separar a tabela */
-  text-align: center;
-    justify-content: center;
-}
 
 
 
