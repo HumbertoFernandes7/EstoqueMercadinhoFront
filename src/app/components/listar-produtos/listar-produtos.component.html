@@ -1,5 +1,8 @@
 <div *ngIf="!modalVisivel">
   <h1>Lista de Produtos</h1>
+  <div class="busca">
+    <input (input)="buscarProduto()" [(ngModel)]="termoDePesquisa"  type="text" class="barraPesquisa" placeholder="Nome do Produto">
+  </div>
   <div class="container">
     <table>
       <thead>

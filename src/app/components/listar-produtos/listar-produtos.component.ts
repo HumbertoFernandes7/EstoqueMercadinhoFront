@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import { ProdutoService } from '../../servicos/produtosService/produto-services.service';
 import { Router } from '@angular/router';
@@ -17,7 +18,8 @@ export class ListarProdutosComponent implements OnInit {
   modalExcluirVisivel: boolean = false;
   modalEditarVisivel: boolean = false;
   id!: number;
-  quantidadeAlterada!: Quantidade;
+  quantidadeAlterada !: Quantidade;
+  termoDePesquisa !: string ;
 
   constructor(private produtoService: ProdutoService, private router: Router) {}
 
@@ -61,7 +63,11 @@ export class ListarProdutosComponent implements OnInit {
     quantidadeFinal = { quantidade: 1 };
     this.produtoService.adicionarQuantidadeEstoque(produto.id, quantidadeFinal).subscribe({
         next: () => {
-          this.listarProdutos();
+          if(this.termoDePesquisa){
+            this.buscarProduto();
+          }else{
+            this.listarProdutos();
+          }
         },
         error: () => {
           this.mensagemErro ='Aconteceu um erro inesperado, tente novamente mais tarde!';
@@ -77,7 +83,11 @@ export class ListarProdutosComponent implements OnInit {
       .removerQuantidadeEstoque(produto.id, quantidadeFinal)
       .subscribe({
         next: () => {
-          this.listarProdutos();
+          if(this.termoDePesquisa){
+            this.buscarProduto();
+          }else{
+            this.listarProdutos();
+          }
         },
         error: (erro) => {
           this.mensagemErro = erro.error.message;
@@ -87,6 +97,17 @@ export class ListarProdutosComponent implements OnInit {
       });
   }
 
+  buscarProduto(){
+   this.produtoService.buscarProdutosPeloNome(this.termoDePesquisa).subscribe({
+    next: (retorno) => {
+      return this.produtos = retorno as unknown as Produto[];
+    },
+    error: () => {
+      this.mensagemErro = 'Ocorreu um erro, tente novamente mais tarte';
+      this.abrirModal();
+    }
+   })
+  }
   //MODAIS
 
   abrirModalExcluir(id: number) {

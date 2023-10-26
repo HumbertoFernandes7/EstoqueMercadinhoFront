@@ -1,9 +1,6 @@
-
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.desenv';
-import { HttpClient } from '@angular/common/http';
-
-import { Observable } from 'rxjs';
+import { HttpClient} from '@angular/common/http';
 import { Produto } from 'src/app/modulos/Produto';
 import { Quantidade } from 'src/app/modulos/Quantidade';
 
@@ -45,8 +42,8 @@ export class ProdutoService {
     return this.http.put(`${APIURL}/${id}/removerQuantidade`, quantidadeAlterada);
   }
 
-  carregarListaDeProdutos(): Observable<Produto[]> {
-    return this.http.get<Produto[]>(`${APIURL}/listar`);
+  buscarProdutosPeloNome(nomeProduto: string){
+    return this.http.get(`${APIURL}/busca?&nomeProduto=${nomeProduto}`)
   }
 
 }
