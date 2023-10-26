@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.desenv';
 import { HttpClient} from '@angular/common/http';
-import { Produto } from 'src/app/modulos/Produto';
-import { Quantidade } from 'src/app/modulos/Quantidade';
+
+import { Produto } from 'src/app/modulos/produto';
+import { Quantidade } from 'src/app/modulos/quantidade';
 
 
 const APIURL = environment.api_url;

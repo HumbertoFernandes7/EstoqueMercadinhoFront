@@ -1,8 +1,7 @@
-import { Produto } from '../../modulos/Produto';
+import { Produto } from '../../modulos/produto';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProdutoService } from '../../servicos/produtosService/produto-services.service';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-cadastrar-produtos',
