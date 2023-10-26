@@ -43,7 +43,11 @@ export class ProdutoService {
   }
 
   buscarProdutosPeloNome(nomeProduto: string){
-    return this.http.get(`${APIURL}/busca?&nomeProduto=${nomeProduto}`)
+    return this.http.get(`${APIURL}/busca?&nomeProduto=${nomeProduto}`);
+  }
+
+  buscaProdutoSemEstoque() {
+    return this.http.get(`${APIURL}/semEstoque`);
   }
 
 }

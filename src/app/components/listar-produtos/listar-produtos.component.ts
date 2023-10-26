@@ -1,4 +1,3 @@
-
 import { Component, OnInit } from '@angular/core';
 import { ProdutoService } from '../../servicos/produtosService/produto-services.service';
 import { Router } from '@angular/router';
@@ -18,8 +17,9 @@ export class ListarProdutosComponent implements OnInit {
   modalExcluirVisivel: boolean = false;
   modalEditarVisivel: boolean = false;
   id!: number;
-  quantidadeAlterada !: Quantidade;
-  termoDePesquisa !: string ;
+  quantidadeAlterada!: Quantidade;
+  termoDePesquisa!: string;
+  semEstoque: boolean = false;
 
   constructor(private produtoService: ProdutoService, private router: Router) {}
 
@@ -32,10 +32,12 @@ export class ListarProdutosComponent implements OnInit {
   listarProdutos() {
     this.produtoService.listaProdutos().subscribe({
       next: (retorno) => {
+        this.semEstoque = false;
         this.produtos = retorno as unknown as Produto[];
       },
       error: () => {
-        this.mensagemErro = 'Aconteceu um erro inesperado, tente novamente mais tarde';
+        this.mensagemErro =
+          'Aconteceu um erro inesperado, tente novamente mais tarde';
         this.abrirModal();
       },
     });
@@ -52,7 +54,8 @@ export class ListarProdutosComponent implements OnInit {
         this.listarProdutos();
       },
       error: () => {
-        this.mensagemErro = 'Aconteceu um erro inesperado, tente novamente mais tarde'
+        this.mensagemErro =
+          'Aconteceu um erro inesperado, tente novamente mais tarde';
         this.abrirModal();
       },
     });
@@ -61,16 +64,21 @@ export class ListarProdutosComponent implements OnInit {
   adicionarQuantidadeEstoque(produto: Produto) {
     let quantidadeFinal: Quantidade;
     quantidadeFinal = { quantidade: 1 };
-    this.produtoService.adicionarQuantidadeEstoque(produto.id, quantidadeFinal).subscribe({
+    this.produtoService
+      .adicionarQuantidadeEstoque(produto.id, quantidadeFinal)
+      .subscribe({
         next: () => {
-          if(this.termoDePesquisa){
+          if (this.termoDePesquisa) {
             this.buscarProduto();
-          }else{
+          } else if (this.produtos.length >= 1) {
+            this.buscaProdutoSemEstoque();
+          } else {
             this.listarProdutos();
           }
         },
         error: () => {
-          this.mensagemErro ='Aconteceu um erro inesperado, tente novamente mais tarde!';
+          this.mensagemErro =
+            'Aconteceu um erro inesperado, tente novamente mais tarde!';
           this.abrirModal();
           this.listarProdutos();
         },
@@ -83,9 +91,9 @@ export class ListarProdutosComponent implements OnInit {
       .removerQuantidadeEstoque(produto.id, quantidadeFinal)
       .subscribe({
         next: () => {
-          if(this.termoDePesquisa){
+          if (this.termoDePesquisa) {
             this.buscarProduto();
-          }else{
+          } else {
             this.listarProdutos();
           }
         },
@@ -97,16 +105,33 @@ export class ListarProdutosComponent implements OnInit {
       });
   }
 
-  buscarProduto(){
-   this.produtoService.buscarProdutosPeloNome(this.termoDePesquisa).subscribe({
-    next: (retorno) => {
-      return this.produtos = retorno as unknown as Produto[];
-    },
-    error: () => {
-      this.mensagemErro = 'Ocorreu um erro, tente novamente mais tarte';
-      this.abrirModal();
-    }
-   })
+  buscarProduto() {
+    this.produtoService.buscarProdutosPeloNome(this.termoDePesquisa).subscribe({
+      next: (retorno) => {
+        return (this.produtos = retorno as unknown as Produto[]);
+      },
+      error: () => {
+        this.mensagemErro = 'Ocorreu um erro, tente novamente mais tarte';
+        this.abrirModal();
+      },
+    });
+  }
+
+  buscaProdutoSemEstoque() {
+    this.produtoService.buscaProdutoSemEstoque().subscribe({
+      next: (retorno) => {
+        if (retorno != 0) {
+          this.produtos = retorno as unknown as Produto[];
+          this.semEstoque = true;
+        } else {
+          this.listarProdutos();
+        }
+      },
+      error: () => {
+        this.mensagemErro = 'Ocorreu um erro, tente novamente mais tarte';
+        this.abrirModal();
+      },
+    });
   }
   //MODAIS
 
