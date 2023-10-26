@@ -1,5 +1,4 @@
 export const environment = {
     production: false,
-    api_url: 'http://localhost:8080/produtos'
+    api_url: 'https://mercadinho-back.onrender.com/produtos'
   }
-  
