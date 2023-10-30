@@ -1,4 +1,5 @@
-<div *ngIf="!modalVisivel">
+<div *ngIf="carregando" class="spinner"></div>
+<div *ngIf="!modalVisivel && !carregando">
   <h1>Cadastrar Produto</h1>
   <form [formGroup]="cadastroProdutoForm">
     <label for="nome">Nome do Produto:</label>
@@ -28,6 +29,7 @@
     <button (click)="cadastraProduto()" type="submit">Enviar</button>
   </form>
 </div>
+
 <!-- Modal de Erro -->
 <div *ngIf="modalVisivel" class="modal" id="errorModal">
   <div>

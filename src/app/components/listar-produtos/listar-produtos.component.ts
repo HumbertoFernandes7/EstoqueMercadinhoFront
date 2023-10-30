@@ -16,6 +16,7 @@ export class ListarProdutosComponent implements OnInit {
   popUpAberto: boolean = false;
   modalExcluirVisivel: boolean = false;
   modalEditarVisivel: boolean = false;
+  carregando: boolean = true
   id!: number;
   quantidadeAlterada!: Quantidade;
   termoDePesquisa!: string;
@@ -32,6 +33,7 @@ export class ListarProdutosComponent implements OnInit {
   listarProdutos() {
     this.produtoService.listaProdutos().subscribe({
       next: (retorno) => {
+        this.carregando = false;
         this.semEstoque = false;
         this.produtos = retorno as unknown as Produto[];
       },
@@ -48,9 +50,10 @@ export class ListarProdutosComponent implements OnInit {
   }
 
   excluirProduto() {
+    this.carregando = true;
+    this.fecharModalExcluir();
     this.produtoService.excluirProduto(this.id).subscribe({
       next: () => {
-        this.fecharModalExcluir();
         this.listarProdutos();
       },
       error: () => {
@@ -136,6 +139,7 @@ export class ListarProdutosComponent implements OnInit {
   //MODAIS
 
   abrirModalExcluir(id: number) {
+    this.carregando = false;
     this.modalExcluirVisivel = true;
     this.id = id;
     this.mensagemErro = 'Você deseja EXCLUIR este produto?';
@@ -146,6 +150,7 @@ export class ListarProdutosComponent implements OnInit {
   }
 
   abrirModal() {
+    this.carregando = false;
     this.modalVisivel = true;
   }
 

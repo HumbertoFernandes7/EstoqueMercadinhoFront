@@ -12,6 +12,7 @@ export class CadastrarProdutosComponent implements OnInit {
   modalVisivel: boolean = false;
   mensagemDoModal: string = '';
   tituloDoModal: string = '';
+  carregando: boolean = false;
   cadastroProdutoForm!: FormGroup;
   nome!: '';
   quantidade!: '';
@@ -23,8 +24,6 @@ export class CadastrarProdutosComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    //ARMAZENAMENTO DO ID
-
     this.cadastroProdutoForm = this.formBuilder.group({
       nome: ['', [Validators.required]],
       quantidade: ['', [Validators.required]],
@@ -35,6 +34,7 @@ export class CadastrarProdutosComponent implements OnInit {
   //métodos
 
   cadastraProduto() {
+    this.carregando = true;
     if (this.cadastroProdutoForm.valid) {
       var produto = this.cadastroProdutoForm.getRawValue() as Produto;
       this.produtoService.cadastraProduto(produto).subscribe({
@@ -55,6 +55,7 @@ export class CadastrarProdutosComponent implements OnInit {
   //MODAIS
 
   abrirModal() {
+    this.carregando = false;
     this.modalVisivel = true;
   }
 

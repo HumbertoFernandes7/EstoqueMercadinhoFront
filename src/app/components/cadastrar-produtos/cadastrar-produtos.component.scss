@@ -67,7 +67,7 @@ form {
   transform: translate(-50%, -50%);
 }
 
-.modalButton{
+.modalButton {
   background-color: #77a578; /* Cor de fundo verde */
   border: none;
   color: white;
@@ -79,4 +79,19 @@ form {
   margin-top: 20px; /* Espaçamento superior para o botão */
   cursor: pointer;
   border-radius: 8px;
+}
+
+.spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-top: 4px solid #007bff; /* Cor do spinner (neste caso, azul) */
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite; /* Animação do spinner */
+  margin: 150px auto; /* Centraliza o spinner na tela */
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

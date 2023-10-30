@@ -1,5 +1,8 @@
-<div *ngIf="!modalVisivel">
-  <h1 *ngIf="produtos.length == 0"> Não há produtos cadastrados</h1>
+<div *ngIf="carregando" class="spinner"></div>
+<div *ngIf="!modalVisivel && !carregando">
+  <h1 *ngIf="produtos.length == 0">
+    Não há produtos cadastrados
+  </h1>
   <div *ngIf="produtos.length > 0">
     <h1>Lista de Produtos</h1>
     <div class="busca">
