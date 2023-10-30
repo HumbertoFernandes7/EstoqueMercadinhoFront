@@ -12,6 +12,7 @@ import { Location } from '@angular/common';
 })
 export class AlterarProdutoComponent implements OnInit {
   modalVisivel: boolean = false;
+  carregando: boolean = false;
   mensagemDoModal: string = '';
   tituloDoModal: string = '';
   alteraProdutoForm!: FormGroup;
@@ -31,11 +32,9 @@ export class AlterarProdutoComponent implements OnInit {
   ) {}
 
   ngOnInit(){
-    //Armazena o iD do produto
     this.activeRoute.params.subscribe((params) => {
       this.produtoId = params['id'];
     });
-    //Buscpa pelo iD do produto
     this.buscaProdutoPorId(this.produtoId);
     this.alteraProdutoForm = this.formBuilder.group({
       nome: ['', [Validators.required]],
@@ -62,6 +61,7 @@ export class AlterarProdutoComponent implements OnInit {
   }
 
   alterarProduto() {
+    this.carregando = true;
     if (this.alteraProdutoForm.valid) {
       var produtoAlterado = this.alteraProdutoForm.getRawValue() as Produto;
       this.produtoService
@@ -70,11 +70,13 @@ export class AlterarProdutoComponent implements OnInit {
           next: () => {
             this.mensagemDoModal = 'Seu produto foi atualizado com sucesso!';
             this.tituloDoModal = 'Deu certo!';
+            this.carregando = false;
             this.abrirModal();
           },
           error: (error) => {
             this.mensagemDoModal = error.error.message;
             this.tituloDoModal = 'Não foi possivel atualizar o produto';
+            this.carregando = false;
             this.abrirModal();
           },
         });

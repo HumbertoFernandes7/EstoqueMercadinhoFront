@@ -1,4 +1,5 @@
-<div *ngIf="!modalVisivel">
+<div *ngIf="carregando" class="spinner"></div>
+<div *ngIf="!modalVisivel && !carregando">
   <h1>Alterar Produto</h1>
   <form [formGroup]="alteraProdutoForm">
     <label for="nome">Nome do Produto:</label>
@@ -29,7 +30,6 @@
       <button (click)="alterarProduto()" type="submit" class="botao-alterar">Atualizar</button>
       <button (click)="voltarParaLista()" class="botao-voltar">Voltar</button>
     </div>
-
 
   </form>
 </div>
