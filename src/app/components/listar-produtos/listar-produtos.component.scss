@@ -48,13 +48,22 @@ tr:hover {
   justify-content: center; /* Centraliza horizontalmente */
   align-items: center; /* Centraliza verticalmente */
   font-size: 24px; /* Tamanho do ícone */
-  cursor: pointer;
   margin-right: 4px;
+  cursor: pointer;
 }
 
 .bi-arrow-left-circle {
   margin-right: -15px;
   margin-left: 10px;
+  cursor: pointer;
+}
+
+.bi-patch-plus {
+  display: flex;
+  margin-left: auto;
+  width: 31%;
+  font-size: 24px;
+  margin-bottom: -25px;
   cursor: pointer;
 }
 
@@ -116,6 +125,10 @@ tr:hover {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

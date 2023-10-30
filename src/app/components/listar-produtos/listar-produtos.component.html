@@ -1,19 +1,18 @@
 <div *ngIf="carregando" class="spinner"></div>
 <div *ngIf="!modalVisivel && !carregando">
-  <h1 *ngIf="produtos.length == 0">
-    Não há produtos cadastrados
-  </h1>
+  <h1 *ngIf="produtos.length == 0">Não há produtos cadastrados</h1>
   <div *ngIf="produtos.length > 0">
     <h1>Lista de Produtos</h1>
     <div class="busca">
       <input
-        (input)="buscarProduto()"
+        (input)="buscarProdutoPeloNome()"
         [(ngModel)]="termoDePesquisa"
         type="text"
         class="barraPesquisa"
         placeholder="Nome do Produto"
       />
     </div>
+    <i class="bi bi-patch-plus" routerLink="/produtos/cadastrar" ></i>
     <div class="container">
       <table>
         <thead>

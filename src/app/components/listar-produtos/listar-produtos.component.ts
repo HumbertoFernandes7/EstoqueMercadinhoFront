@@ -16,7 +16,7 @@ export class ListarProdutosComponent implements OnInit {
   popUpAberto: boolean = false;
   modalExcluirVisivel: boolean = false;
   modalEditarVisivel: boolean = false;
-  carregando: boolean = true
+  carregando: boolean = true;
   id!: number;
   quantidadeAlterada!: Quantidade;
   termoDePesquisa!: string;
@@ -72,7 +72,7 @@ export class ListarProdutosComponent implements OnInit {
       .subscribe({
         next: () => {
           if (this.termoDePesquisa) {
-            this.buscarProduto();
+            this.buscarProdutoPeloNome();
           } else if (this.produtos.length >= 1) {
             this.buscaProdutoSemEstoque();
           } else {
@@ -95,7 +95,7 @@ export class ListarProdutosComponent implements OnInit {
       .subscribe({
         next: () => {
           if (this.termoDePesquisa) {
-            this.buscarProduto();
+            this.buscarProdutoPeloNome();
           } else {
             this.listarProdutos();
           }
@@ -108,7 +108,7 @@ export class ListarProdutosComponent implements OnInit {
       });
   }
 
-  buscarProduto() {
+  buscarProdutoPeloNome() {
     this.produtoService.buscarProdutosPeloNome(this.termoDePesquisa).subscribe({
       next: (retorno) => {
         return (this.produtos = retorno as unknown as Produto[]);
@@ -121,9 +121,11 @@ export class ListarProdutosComponent implements OnInit {
   }
 
   buscaProdutoSemEstoque() {
+    this.carregando = true
     this.produtoService.buscaProdutoSemEstoque().subscribe({
       next: (retorno) => {
         if (retorno != 0) {
+          this.carregando = false;
           this.produtos = retorno as unknown as Produto[];
           this.semEstoque = true;
         } else {
